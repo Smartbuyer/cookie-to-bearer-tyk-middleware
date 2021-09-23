@@ -89,7 +89,7 @@ rewriteCookie.NewProcessRequest(function(request, session, spec) {
       }
     }
   } catch (error) {
-    console.error({ function: 'NewProcessRequest', error });
+    console.error({ function: 'rewriteCookie', msg: error.message, error: error });
   }
 
   return rewriteCookie.ReturnData(request, session.meta_data);
