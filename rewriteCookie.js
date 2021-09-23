@@ -76,7 +76,7 @@ var rewriteCookie = new TykJS.TykMiddleware.NewMiddleware({});
 
 rewriteCookie.NewProcessRequest(function(request, session, spec) {
   try {
-    var cookies = request.Headers.Cookie.map(function(c) {
+    var cookies = (request.Headers.Cookie || []).map(function(c) {
       return parse(c);
     });
     if (cookies.length) {
@@ -89,7 +89,7 @@ rewriteCookie.NewProcessRequest(function(request, session, spec) {
       }
     }
   } catch (error) {
-    console.error(error);
+    console.error({ function: 'NewProcessRequest', error });
   }
 
   return rewriteCookie.ReturnData(request, session.meta_data);
